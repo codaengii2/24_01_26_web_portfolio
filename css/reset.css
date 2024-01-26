@@ -1,0 +1,128 @@
+@font-face {
+  font-family: "hana";
+  font-weight: 300;
+  font-display: swap;
+  src: url("../font/Hana2-Light.ttf") format("ttf");
+}
+@font-face {
+  font-family: "hana";
+  font-weight: 400;
+  font-display: swap;
+  src: url("../font/Hana2-Regular.ttf") format("ttf");
+}
+@font-face {
+  font-family: "hana";
+  font-weight: 500;
+  font-display: swap;
+  src: url("../font/Hana2-Medium.ttf") format("ttf");
+}
+@font-face {
+  font-family: "hana";
+  font-weight: 900;
+  font-display: swap;
+  src: url("../font/Hana2-Bold.ttf") format("ttf");
+}
+
+@font-face {
+  font-family: "GangwonEduPowerExtraBoldA";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEduPowerExtraBoldA.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+ul,
+li {
+  list-style: none;
+}
+
+img {
+  border: 0;
+  display: block;
+}
+
+a {
+  text-decoration: none;
+  color: #f2f4f3;
+}
+
+body {
+  font-family: "Pretendard", sans-serif;
+  background-color: #0a0908;
+  color: #f2f4f3;
+  overflow-x: hidden;
+}
+
+#wrap {
+  width: 100%;
+  position: relative;
+  cursor: url(../img/cur.png) 10 10, pointer;
+  scroll-behavior: smooth;
+  transition: opacity 0.5s;
+}
+
+#wrap:active {
+  cursor: url(../img/cur_active.png) 24 24, pointer;
+}
+
+.main_title {
+  font-family: "Archivo", sans-serif;
+  font-size: 120px;
+  font-weight: 900;
+  letter-spacing: -4px;
+}
+
+.word {
+  font-family: "Archivo", sans-serif;
+  font-size: 120px;
+  font-weight: 900;
+  letter-spacing: -5px;
+  margin-top: 40px;
+}
+
+.title {
+  font-family: "Archivo", sans-serif;
+  font-weight: 900;
+  font-size: 88px;
+}
+
+.main_letter {
+  text-align: center;
+}
+
+.letter:nth-child(1) {
+  margin-left: 0;
+}
+
+.k_title {
+  width: fit-content;
+  padding: 0 2px;
+  font-size: 56px;
+  font-weight: 700;
+  background-color: #f2f4f3;
+  color: #0a0908;
+}
+
+.sub {
+  width: 100%;
+  word-spacing: normal;
+  font-size: 32px;
+  text-align: right;
+  line-height: 45px;
+}
+
+.flex {
+  display: flex;
+}
+
+.num {
+  font-family: "Goldman", sans-serif;
+  font-size: 104px;
+  font-weight: 700;
+}
