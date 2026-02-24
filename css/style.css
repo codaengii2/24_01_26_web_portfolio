@@ -69,6 +69,7 @@ header {
   position: relative;
   right: 33.5px;
   z-index: 5;
+  cursor: pointer;
 }
 
 .line {
@@ -128,6 +129,7 @@ header {
 
 .activeNone {
   opacity: 0;
+  pointer-events: none;
 }
 
 /* section_1 */
@@ -336,7 +338,8 @@ header {
   opacity: 0;
 } */
 
-.sec_2 > .title {
+.sec_2 > .title,
+.sec_3 .title {
   float: left;
   position: relative;
   top: 40px;
@@ -362,6 +365,7 @@ header {
   height: 0;
   overflow: hidden;
   opacity: 0;
+  transition: height 0.5s, opacity 0.5s;
 }
 
 .pro_con_wrap.active01 {
@@ -448,19 +452,10 @@ header {
   align-items: center;
 }
 
-.GwangDong .main_img {
-  margin-bottom: 60px;
-}
-
-.Huxely .main_img {
-  margin-bottom: 60px;
-}
-.GeumJeong .main_img {
-  margin-bottom: 60px;
-}
-.Hanacard .main_img {
-  margin-bottom: 60px;
-}
+.GwangDong .main_img,
+.Huxely .main_img,
+.GeumJeong .main_img,
+.Hanacard .main_img,
 .Hollys .main_img {
   margin-bottom: 60px;
 }
@@ -748,13 +743,6 @@ header {
 }
 
 /* section_3 */
-
-.sec_3 .title {
-  float: left;
-  position: relative;
-  top: 40px;
-  left: 107px;
-}
 
 .sec_3:after {
   height: 884px;

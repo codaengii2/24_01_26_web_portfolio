@@ -1,46 +1,48 @@
-window.onload = function () {
-  const slider = document.querySelector(".pro_wrap");
-  const slideLis = document.querySelectorAll(".pro");
-  const moveButton = document.querySelector(".arrow");
-  const rightEl = document.querySelector(".right img");
-  const leftEl = document.querySelector(".left img");
+window.addEventListener("load", () => {
+  const sliderEl = document.querySelector(".pro_wrap");
+  const slideEls = document.querySelectorAll(".pro");
+  const moveButtonEl = document.querySelector(".arrow");
+  const rightArrowEl = document.querySelector(".right img");
+  const leftArrowEl = document.querySelector(".left img");
 
-  const liWidth = slideLis[0].clientWidth;
-  const sliderWidth = liWidth * slideLis.length;
-  slider.style.width = `${sliderWidth}px`;
-
-  let currentIdx = 0; // 슬라이드 현재 번호
-  let translate = 0; // 슬라이드 위치 값
-
-  moveButton.addEventListener("click", moveSlide);
-  function moveSlide(e) {
-    e.preventDefault();
-    if (e.target === rightEl) {
-      if (currentIdx !== slideLis.length - 1) {
-        translate -= liWidth;
-        slider.style.transform = `translateX(${translate}px)`;
-        currentIdx += 1;
-      }
-    } else if (e.target === leftEl) {
-      if (currentIdx !== 0) {
-        translate += liWidth;
-        slider.style.transform = `translateX(${translate}px)`;
-        currentIdx -= 1;
-      }
-    }
-
-    if (currentIdx == slideLis.length - 1) {
-      rightEl.style.opacity = 0;
-    } else {
-      rightEl.style.opacity = 1;
-    }
-
-    if (currentIdx == 0) {
-      leftEl.style.opacity = 0;
-    } else {
-      leftEl.style.opacity = 1;
-    }
-
-    console.log(currentIdx);
+  if (
+    !sliderEl ||
+    !slideEls.length ||
+    !moveButtonEl ||
+    !rightArrowEl ||
+    !leftArrowEl
+  ) {
+    return;
   }
-};
+
+  const slideWidth = slideEls[0].clientWidth;
+  sliderEl.style.width = `${slideWidth * slideEls.length}px`;
+
+  let currentIndex = 0;
+  let translateX = 0;
+
+  const updateArrowState = () => {
+    rightArrowEl.style.opacity = currentIndex === slideEls.length - 1 ? "0" : "1";
+    leftArrowEl.style.opacity = currentIndex === 0 ? "0" : "1";
+  };
+
+  const moveSlide = (event) => {
+    event.preventDefault();
+
+    if (event.target === rightArrowEl && currentIndex < slideEls.length - 1) {
+      currentIndex += 1;
+      translateX -= slideWidth;
+    }
+
+    if (event.target === leftArrowEl && currentIndex > 0) {
+      currentIndex -= 1;
+      translateX += slideWidth;
+    }
+
+    sliderEl.style.transform = `translateX(${translateX}px)`;
+    updateArrowState();
+  };
+
+  moveButtonEl.addEventListener("click", moveSlide);
+  updateArrowState();
+});

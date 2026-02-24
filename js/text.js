@@ -1,26 +1,25 @@
-// setTimeout(function () {
-const withEl = document.querySelector(".main_title span");
-const mainEl = document.querySelector(".main_title");
-const suinEl = document.querySelector(".suin");
-let windowW = window.innerWidth;
-console.log(windowW);
-withEl.style.opacity = 1;
-// if (windowW >= 1280) {
-//   mainEl.style.marginTop = "150px";
-//   // suinEl.style.marginTop = "50px";
-// }
+const withTextEl = document.querySelector(".main_title span");
+const mainTitleEl = document.querySelector(".main_title");
+const nameWordEl = document.querySelector(".suin");
 
-setTimeout(function () {
-  if (windowW >= 1280) {
-    withEl.style.display = "none";
-    // mainEl.style.transform = "translateX(100px)";
-    suinEl.style.opacity = 1;
-    suinEl.style.marginTop = "20px";
-  } else {
-    withEl.style.opacity = 0;
-    mainEl.style.transform = "translateY(20px)";
-    suinEl.style.opacity = 1;
-    suinEl.style.marginTop = "-80px";
-  }
-}, 4000);
-// }, 0);
+if (withTextEl && mainTitleEl && nameWordEl) {
+  const DESKTOP_WIDTH = 1280;
+  const REVEAL_DELAY_MS = 4000;
+  const isDesktop = window.innerWidth >= DESKTOP_WIDTH;
+
+  withTextEl.style.opacity = "1";
+
+  setTimeout(() => {
+    if (isDesktop) {
+      withTextEl.style.display = "none";
+      nameWordEl.style.opacity = "1";
+      nameWordEl.style.marginTop = "20px";
+      return;
+    }
+
+    withTextEl.style.opacity = "0";
+    mainTitleEl.style.transform = "translateY(20px)";
+    nameWordEl.style.opacity = "1";
+    nameWordEl.style.marginTop = "-80px";
+  }, REVEAL_DELAY_MS);
+}

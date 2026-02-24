@@ -1,13 +1,9 @@
-window.addEventListener("scroll", function () {
-  const scrollValue = window.scrollY;
-  const backEl = document.querySelector(".background");
-  if (scrollValue > 2500) {
-    // console.log("흰배경 나와");
-    // backEl.style.height = "100%";
-    backEl.style.opacity = "1";
-  } else {
-    // console.log("검은배경 나와");
-    // backEl.style.height = "0";
-    backEl.style.opacity = "0";
-  }
-});
+const CONTACT_BACKGROUND_TRIGGER_Y = 2500;
+const contactBackgroundEl = document.querySelector(".background");
+
+if (contactBackgroundEl) {
+  window.addEventListener("scroll", () => {
+    const shouldShow = window.scrollY > CONTACT_BACKGROUND_TRIGGER_Y;
+    contactBackgroundEl.style.opacity = shouldShow ? "1" : "0";
+  });
+}

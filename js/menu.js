@@ -1,95 +1,63 @@
 const wrapEl = document.getElementById("wrap");
-const btnEl = document.querySelector(".menu_btn");
-const liEl = document.querySelectorAll(".menu li");
-const lineEl1 = document.querySelector(".line:nth-child(1)");
-const lineEl2 = document.querySelector(".line:nth-child(2)");
+const menuBtnEl = document.querySelector(".menu_btn");
 const menuEl = document.querySelector(".menu");
+const menuLineEls = document.querySelectorAll(".menu_btn .line");
+const menuLinkEls = document.querySelectorAll(".menu a[data-target]");
 
-const openMenu = () => {
-  lineEl1.style.transform = "rotate(45deg)";
-  lineEl1.style.top = "4px";
-  lineEl2.style.transform = "rotate(-45deg)";
-  lineEl2.style.top = "-4px";
-};
+if (wrapEl && menuBtnEl && menuEl && menuLineEls.length === 2) {
+  const [lineTopEl, lineBottomEl] = menuLineEls;
+  let isMenuOpen = false;
 
-const closeMenu = () => {
-  lineEl1.style.transform = "rotate(0deg)";
-  lineEl1.style.top = "0";
-  lineEl2.style.transform = "rotate(0deg)";
-  lineEl2.style.top = "0";
-  menuEl.style.zIndex = "-99";
-};
+  const setMenuButtonState = (opened) => {
+    lineTopEl.style.transform = opened ? "rotate(45deg)" : "rotate(0deg)";
+    lineTopEl.style.top = opened ? "4px" : "0";
+    lineBottomEl.style.transform = opened ? "rotate(-45deg)" : "rotate(0deg)";
+    lineBottomEl.style.top = opened ? "-4px" : "0";
+  };
 
-const menuHandler = () => {
-  if (menuEl.classList.contains("active02") === false) {
-    openMenu(); //메뉴버튼
+  const openMenu = () => {
+    isMenuOpen = true;
+    setMenuButtonState(true);
     menuEl.classList.remove("activeNone");
-    menuEl.classList.add("active02"); //메뉴창 생기게
+    menuEl.classList.add("active02");
     wrapEl.style.position = "fixed";
-  } else if (menuEl.classList.contains("active02") === true) {
-    closeMenu();
+  };
+
+  const closeMenu = () => {
+    isMenuOpen = false;
+    setMenuButtonState(false);
     menuEl.classList.remove("active02");
+    menuEl.classList.add("activeNone");
     wrapEl.style.position = "relative";
-    // li01();
-    // li02();
-    // li03();
-  }
-};
+  };
 
-btnEl.addEventListener("click", menuHandler);
-
-// liEl.forEach(function (element) {
-//   element.addEventListener("click", function () {
-//     //각 메뉴 버튼을 클릭하면
-//     if (menuEl.classList.contains("activeNone") === false) {
-//       //메뉴가 열린상태
-//       menuEl.classList.add("activeNone"); // 메뉴창이 사라지게
-//       closeMenu();
-//       wrapEl.style.position = "relative"; //wrap에 스크롤바가 다시 생기게
-//     } else if (menuEl.classList.contains("activeNone") === true) {
-//       //메뉴 닫힌상태
-//       menuEl.classList.add("active02"); //메뉴창이 다시 생기게
-//     }
-//   });
-// });
-
-// function li01() {
-//   liEl[1].addEventListener("click", function () {
-//     const sec2 = document.querySelector(".sec_2");
-//     sec2.scrollIntoView({ behavior: "smooth" });
-//   });
-// }
-
-// function li02() {
-//   liEl[2].addEventListener("click", function () {
-//     const sec3 = document.querySelector(".sec_3");
-//     sec3.scrollIntoView({ behavior: "smooth" });
-//   });
-// }
-
-// function li03() {
-//   liEl[3].addEventListener("click", function () {
-//     const sec4 = document.querySelector(".sec_4");
-//     sec4.scrollIntoView({ behavior: "smooth" });
-//   });
-// }
-
-liEl.forEach(function (element, index) {
-  element.addEventListener("click", function () {
-    if (menuEl.classList.contains("activeNone") === false) {
-      menuEl.classList.add("activeNone");
+  const toggleMenu = () => {
+    if (isMenuOpen) {
       closeMenu();
-      wrapEl.style.position = "relative";
-      wrapEl.style.zIndex = "99";
-    } else if (menuEl.classList.contains("activeNone") === true) {
-      menuEl.classList.add("active02");
+      return;
     }
+    openMenu();
+  };
 
-    // Scroll to corresponding section
-    const sections = [null, ".sec_2", ".sec_3", ".sec_4"];
-    const section = document.querySelector(sections[index]);
-    if (section) {
-      section.scrollIntoView({ behavior: "smooth" });
+  menuBtnEl.addEventListener("click", toggleMenu);
+  menuBtnEl.addEventListener("keydown", (event) => {
+    if (event.key === "Enter" || event.key === " ") {
+      event.preventDefault();
+      toggleMenu();
     }
   });
-});
+
+  menuLinkEls.forEach((linkEl) => {
+    linkEl.addEventListener("click", (event) => {
+      const targetId = linkEl.dataset.target;
+      if (!targetId) return;
+
+      const sectionEl = document.getElementById(targetId);
+      if (!sectionEl) return;
+
+      event.preventDefault();
+      sectionEl.scrollIntoView({ behavior: "smooth" });
+      closeMenu();
+    });
+  });
+}
